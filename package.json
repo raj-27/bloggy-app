@@ -5,6 +5,7 @@
     "build": "npx tsc",
     "lint": "npx eslint .",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "prepare": "husky"
   },
   "dependencies": {

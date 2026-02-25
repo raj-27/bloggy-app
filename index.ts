@@ -23,8 +23,12 @@ app.get('/', async (req, res) => {
             host: process.env.NODE_HOST || 'Unknown',
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error retrieving blog posts');
+        if (error instanceof Error) {
+            res.status(500).send({
+                errorMessage: error.message,
+                message: 'Error retrieving blog posts',
+            });
+        }
     }
 });
 
