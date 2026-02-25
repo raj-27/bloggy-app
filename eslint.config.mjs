@@ -1,10 +1,13 @@
-import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
+import eslint from '@eslint/js';
 
-export default defineConfig(
+export default tseslint.config(
     eslint.configs.recommended,
-    tseslint.configs.recommended,
-    tseslint.configs.strict,
-    tseslint.configs.stylistic,
+    ...tseslint.configs.recommended,
+    ...tseslint.configs.strict,
+    ...tseslint.configs.stylistic,
+    {
+        // Global ignores yahan aayenge
+        ignores: ['dist/**', 'node_modules/**'],
+    },
 );
