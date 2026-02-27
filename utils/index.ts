@@ -3,5 +3,5 @@ export function getVersion() {
 }
 
 export function getHost() {
-    return ' ';
+    return 'unknown';
 }
