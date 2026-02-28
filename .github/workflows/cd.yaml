@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
     env:
-      IMAGE_NAME: rajyadav27/blog-app
+      IMAGE_NAME: rajyadav27/bloggy-app
       IMAGE_TAG: build-${{github.run_number}}
     steps:
       - name: Checkout the source code
@@ -48,7 +48,7 @@ jobs:
     needs:
       - build-and-push
     env:
-      IMAGE_NAME: rajyadav27/blog-app
+      IMAGE_NAME: rajyadav27/bloggy-app
       IMAGE_TAG: build-${{github.run_number}}
     steps:
       - name: SSH into the server
