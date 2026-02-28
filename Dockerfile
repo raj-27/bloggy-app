@@ -19,5 +19,5 @@ EXPOSE 3000
 # Start in dev mode with nodemon
 # CMD ["npm", "run", "dev"]
 
-ENTRYPOINT [ "wait-for-it.sh", "blog-my-db:3306", "-"]
+ENTRYPOINT ["wait-for-it.sh", "blog-my-db:3306", "--"]
 CMD ["npm", "run", "dev"]
