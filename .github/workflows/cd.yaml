@@ -44,7 +44,7 @@ jobs:
 
   deploy:
     name: Deploy the image to docker swarm cluster
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     env:
       IMAGE_NAME: rajyadav27/blog-app
       IMAGE_TAG: build-${{github.run_number}}
