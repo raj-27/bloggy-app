@@ -67,3 +67,4 @@ jobs:
 
             sudo docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
             sudo docker stack deploy -c compose.yaml bloggy
+
