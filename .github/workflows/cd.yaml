@@ -2,7 +2,7 @@ name: Bloggy CD
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   build-and-push:
@@ -31,7 +31,7 @@ jobs:
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: compose.yaml
-          propertyPath: 'services[blog-server].image'
+          propertyPath: "services[blog-server].image"
           value: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
           commitChange: false
       - name: commit the changes

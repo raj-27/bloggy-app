@@ -6,7 +6,7 @@ name: Bloggy App
 
 on:
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   lint:
@@ -63,7 +63,3 @@ jobs:
   #         password: ${{secrets.DOCKERHUB_PASSWORD}}
   #     - name : Push docker image to docker hub
   #       run : docker push ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
-
-
-
-
