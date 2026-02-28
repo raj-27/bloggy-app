@@ -54,7 +54,7 @@ jobs:
       - build
     steps:
       - name : Checkout the source code
-        uses : action/checkout@v4
+        uses: actions/checkout@v4
       - name : Build docker image
         run : docker build -t ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}} --platform linux/amd64 .
       - name : Login into docker hub
