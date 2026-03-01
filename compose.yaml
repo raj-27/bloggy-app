@@ -82,6 +82,8 @@ services:
        rollback_config:
          parallelism: 1
          order: start-first
+      networks:
+        - blog-app-net
 volumes:
   blog-db-vol: null
   mysql_backup: null
