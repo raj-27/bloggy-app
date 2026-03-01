@@ -75,9 +75,6 @@ services:
         - mysql_backup:/backup
       deploy:
        replicas: 1
-       placement:
-         constraints:
-           - node.labels.dbwala == true
        update_config:
          order: start-first
          failure_action: rollback
