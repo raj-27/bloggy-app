@@ -28,11 +28,10 @@ services:
       - '3306:3306'
     networks:
       blog-app-net:
-          aliases:
-            - blog-db
-
+        aliases:
+          - blog-db
   blog-server:
-    image: rajyadav27/bloggy-app:build-18
+    image: rajyadav27/bloggy-app:build-19
     deploy:
       replicas: 1
       update_config:
