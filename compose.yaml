@@ -60,6 +60,34 @@ services:
       - NODE_HOST="{{.Node.Hostname}}"
     networks:
       - blog-app-net
+
+  db-backup:
+      image: fradelg/mysql-cron-backup:1.14.2
+      environment:
+       - MYSQL_HOST=blog-db
+       - MYSQL_USER=root
+       - MYSQL_PASS=root
+       - MAX_BACKUPS=5
+       - INIT_BACKUP=1
+       # Every day at 03:00
+       - CRON_TIME=* * * * *
+       # Make it small
+       - GZIP_LEVEL=9
+       # As of MySQL 8.0.21 this is needed
+       - MYSQLDUMP_OPTS=--no-tablespaces
+       - INIT_RESTORE_LATES = 1
+       - EXIT_BACKUP = 1
+      volumes:
+        - mysql_backup:/backup
+      deploy:
+       replicas: 1
+       update_config:
+         order: start-first
+         failure_action: rollback
+         delay: 10s
+       rollback_config:
+         parallelism: 1
+         order: start-first
 volumes:
   blog-db-vol: null
 networks:
