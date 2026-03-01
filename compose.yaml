@@ -29,7 +29,7 @@ services:
     networks:
       - blog-app-net
   blog-server:
-    image: rajyadav27/bloggy-app:build-13
+    image: rajyadav27/bloggy-app:build-14
     deploy:
       replicas: 1
       update_config:
