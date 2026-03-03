@@ -1,0 +1,84 @@
+services:
+  blog-db:
+    image: mysql
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        order: start-first
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-h'
+        - localhost
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - blog-db-vol:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      blog-app-net:
+        aliases:
+          - blog-db
+  blog-server:
+    image: rajyadav27/bloggy-app:build-21
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        order: start-first
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - '--no-verbose'
+        - '--tries=1'
+        - '--spider'
+        - http://localhost:3000/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - '3001:3000'
+    environment:
+      - DB_HOST=blog-db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=blogdb
+      - NODE_HOST="{{.Node.Hostname}}"
+    networks:
+      - blog-app-net
+  db-backup:
+   image: fradelg/mysql-cron-backup:1.14.2
+   environment:
+     - MYSQL_HOST=blog-db
+     - MYSQL_USER=root
+     - MYSQL_PASS=root
+     - MAX_BACKUPS=5
+     - INIT_BACKUP=1
+     - CRON_TIME=* * * * *
+     - GZIP_LEVEL=9
+     - EXIT_BACKUP=1
+   volumes:
+     - /home/ubuntu/mysql_backup:/backup
+   networks:
+     - blog-app-net
+volumes:
+  blog-db-vol: null
+  mysql_backup: null
+networks:
+  blog-app-net: null
