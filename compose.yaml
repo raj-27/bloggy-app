@@ -72,8 +72,7 @@ services:
      - INIT_BACKUP=1
      - CRON_TIME=* * * * *
      - GZIP_LEVEL=9
-     - MYSQLDUMP_OPTS=--no-tablespaces
-     - INIT_RESTORE_LATEST=1
+     - EXIT_BACKUP=1
    volumes:
      - mysql_backup:/backup
    networks:
