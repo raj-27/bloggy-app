@@ -37,7 +37,7 @@ jobs:
       - name: commit the changes
         run: |
           git config user.name github-actions
-          sudo docker stack deploy -c compose.prod.yaml bloggy
+          git config user.email github-action@githun.com
           git add .
           git commit -m "bum the image version ${{env.IMAGE_TAG}}"
           git push
