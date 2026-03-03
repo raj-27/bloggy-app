@@ -31,7 +31,7 @@ services:
         aliases:
           - blog-db
   blog-server:
-    image: rajyadav27/bloggy-app:build-20
+    image: rajyadav27/bloggy-app:build-21
     deploy:
       replicas: 1
       update_config:
@@ -78,8 +78,6 @@ services:
      - mysql_backup:/backup
    networks:
      - blog-app-net
-
-
 volumes:
   blog-db-vol: null
   mysql_backup: null
