@@ -31,7 +31,7 @@ services:
         aliases:
           - blog-db
   blog-server:
-    image: rajyadav27/bloggy-app:build-26
+    image: rajyadav27/bloggy-app:build-27
     deploy:
       replicas: 1
       update_config:
